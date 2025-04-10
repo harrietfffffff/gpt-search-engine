@@ -16,7 +16,7 @@ npm install cors
 app.use(cors());
 app.use(bodyParser.json());
 
-app.post("/api/ask", async (req, res) => {
+app.post("/ask", async (req, res) => {
   try {
     const { question } = req.body;
 
