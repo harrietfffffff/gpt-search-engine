@@ -1,18 +1,22 @@
 import express from "express";
-import dotenv from "dotenv";
 import cors from "cors";
+import dotenv from "dotenv";
 import bodyParser from "body-parser";
 import { OpenAI } from "openai";
 
 dotenv.config();
+
 const app = express();
 const PORT = process.env.PORT || 3001;
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+});
 
 app.use(cors());
 app.use(bodyParser.json());
 
-app.post("/api/ask", async (req, res) => {
+app.post("/ask", async (req, res) => {
   try {
     const { question } = req.body;
 
@@ -24,6 +28,7 @@ app.post("/api/ask", async (req, res) => {
     const answer = chat.choices[0]?.message?.content || "No answer.";
     res.json({ answer });
   } catch (error) {
+    console.error("OpenAI error:", error);
     res.status(500).json({ error: "Something went wrong." });
   }
 });
