@@ -10,6 +10,7 @@ const PORT = process.env.PORT || 3001;
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 const cors = require("cors");
 app.use(cors());
+npm install cors
 
 
 app.use(cors());
